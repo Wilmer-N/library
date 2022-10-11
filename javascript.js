@@ -10,22 +10,23 @@ const bookPopUp = document.querySelector("#book-pop")
 
 addButton.addEventListener("click", function(){
     bookPopUp.style.display = "none"
+    //creates a new object with the inputed values
    const book = new Book(titleInput.value, authorInput.value, pagesInput.value, isReadInput.value)
    addBookToLibrary(book)
+   //makes a clean slate for the next book
+   resetInput()
 })
 
 let myLibrary = [];
-for (let i = 0; i < myLibrary.length; i++) {
-    createCard(myLibrary[i])
-}
-
 
 function createCard(object) {
     const newCard = document.createElement("div")
     newCard.classList.add("card")
     libraryCon.appendChild(newCard)
+    //creates 3 paragraphs
     for (let i = 0; i < 3; i++) {
         const paragraph = document.createElement("p")
+        //fills the paragraphs with the values from the object
         paragraph.textContent = object[Object.keys(object)[i]]
         newCard.appendChild(paragraph)
     }
@@ -42,10 +43,16 @@ function Book(name, author, pages, isRead) {
   function addBookToLibrary(book) {
     // do stuff here
     myLibrary.push(book)
-    console.log(myLibrary)
     createCard(book)
   }
 
 addBookBtn.addEventListener("click", function(){
+    //makes the pop-up visable
     bookPopUp.style.display = "flex"
 })
+
+function resetInput(){
+    titleInput.value = ""
+     authorInput.value = ""
+      pagesInput.value = ""
+}
