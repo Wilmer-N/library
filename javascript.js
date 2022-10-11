@@ -4,35 +4,17 @@ const pagesInput = document.querySelector("#pages-input")
 const isReadInput = document.querySelector("#checkbox-input")
 const addButton = document.querySelector("#book-submit")
 const libraryCon = document.querySelector("#library-container")
+const addBookBtn = document.querySelector("#add-book")
+const bookPopUp = document.querySelector("#book-pop")
 
 
 addButton.addEventListener("click", function(){
+    bookPopUp.style.display = "none"
    const book = new Book(titleInput.value, authorInput.value, pagesInput.value, isReadInput.value)
    addBookToLibrary(book)
 })
 
-let myLibrary = [
-    {name: "wilmer",
-     author: "me",
-     pages: 150,
-     isRead: true   
-    },
-    {name: "emil",
-     author: "me",
-     pages: 150,
-     isRead: true   
-    },
-    {name: "ebber",
-     author: "me",
-     pages: 150,
-     isRead: true   
-    },
-    {name: "simon",
-     author: "me",
-     pages: 150,
-     isRead: true   
-    }
-];
+let myLibrary = [];
 for (let i = 0; i < myLibrary.length; i++) {
     createCard(myLibrary[i])
 }
@@ -61,4 +43,9 @@ function Book(name, author, pages, isRead) {
     // do stuff here
     myLibrary.push(book)
     console.log(myLibrary)
+    createCard(book)
   }
+
+addBookBtn.addEventListener("click", function(){
+    bookPopUp.style.display = "flex"
+})
