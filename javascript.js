@@ -17,7 +17,20 @@ addButton.addEventListener("click", function(){
    resetInput()
 })
 
-let myLibrary = [];
+let myLibrary = [
+    {name: 123, age: 124, gaf: "asd", isRead: true}
+];
+
+for (let i = 0; i < myLibrary.length; i++) {
+    createCard(myLibrary[i])
+}
+
+function displayCard (){
+    libraryCon.innerHTML = ""
+    for (let i = 0; i < myLibrary.length; i++) {
+    createCard(myLibrary[i])
+}
+}
 
 function createCard(object) {
     const newCard = document.createElement("div")
@@ -43,7 +56,7 @@ function Book(name, author, pages, isRead) {
   function addBookToLibrary(book) {
     // do stuff here
     myLibrary.push(book)
-    createCard(book)
+    displayCard(book)
   }
 
 addBookBtn.addEventListener("click", function(){
