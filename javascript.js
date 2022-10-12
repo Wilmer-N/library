@@ -43,8 +43,13 @@ function createCard(object) {
     }
     const removeBtn = document.createElement("button")
     newCard.appendChild(removeBtn)
+    removeBtn.classList.add(myLibrary.indexOf(object))
     removeBtn.textContent = "Remove"
-    newCard.setAttribute("data", whereID)
+    removeBtn.addEventListener("click", function(){
+        myLibrary.splice(myLibrary.indexOf(object), 1)
+        displayCard()
+    })
+    
 }
 
 function removeBook(){
