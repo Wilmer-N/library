@@ -17,9 +17,7 @@ addButton.addEventListener("click", function(){
    resetInput()
 })
 
-let myLibrary = [
-    {name: 123, age: 124, gaf: "asd", isRead: true}
-];
+let myLibrary = [];
 
 for (let i = 0; i < myLibrary.length; i++) {
     createCard(myLibrary[i])
@@ -43,6 +41,14 @@ function createCard(object) {
         paragraph.textContent = object[Object.keys(object)[i]]
         newCard.appendChild(paragraph)
     }
+    const removeBtn = document.createElement("button")
+    newCard.appendChild(removeBtn)
+    removeBtn.textContent = "Remove"
+    newCard.setAttribute("data", whereID)
+}
+
+function removeBook(){
+
 }
 
 function Book(name, author, pages, isRead) {
