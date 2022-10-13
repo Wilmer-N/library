@@ -46,17 +46,20 @@ function createCard(object) {
     for (let i = 0; i < 3; i++) {
         const paragraph = document.createElement("p")
         //fills the paragraphs with the values from the object
-        paragraph.textContent = object[Object.keys(object)[i]]
+        paragraph.textContent = `${Object.keys(object)[i]}: \r ${object[Object.keys(object)[i]]}`
         newCard.appendChild(paragraph)
     }
+    const removeText = document.createElement("p")
+    newCard.appendChild(removeText)
+    removeText.textContent = "Mark as finished"
     const toggleIsRead = document.createElement("input")
     toggleIsRead.setAttribute("type", "checkbox")
     newCard.appendChild(toggleIsRead)
     if(object.isRead){
         toggleIsRead.checked = true
-        newCard.style.backgroundColor = "green"
+        newCard.style.backgroundColor = "#65b856"
     }else{
-        newCard.style.backgroundColor = "red"
+        newCard.style.backgroundColor = "#bf6060"
     }
     const removeBtn = document.createElement("button")
     newCard.appendChild(removeBtn)
@@ -65,13 +68,14 @@ function createCard(object) {
         myLibrary.splice(myLibrary.indexOf(object), 1)
         displayCard()
     })
+
     toggleIsRead.addEventListener("click", function(){
         if(toggleIsRead.checked){
             object.isRead = true
-            newCard.style.backgroundColor = "green"
+            newCard.style.backgroundColor = "#65b856"
         }else{
             object.isRead = false
-            newCard.style.backgroundColor = "red"
+            newCard.style.backgroundColor = "#bf6060"
         }
 
     })
