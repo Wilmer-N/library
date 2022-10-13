@@ -1,23 +1,32 @@
 const titleInput = document.querySelector("#title-input")
 const authorInput = document.querySelector("#author-input")
 const pagesInput = document.querySelector("#pages-input")
-const isReadInput = document.querySelector("#checkbox-input")
+//const isReadInput = document.querySelector("#checkbox-input")//
 const addButton = document.querySelector("#book-submit")
 const libraryCon = document.querySelector("#library-container")
 const addBookBtn = document.querySelector("#add-book")
 const bookPopUp = document.querySelector("#book-pop")
+const checkBox = document.querySelector("#checkbox-input")
 
 
 addButton.addEventListener("click", function(){
     bookPopUp.style.display = "none"
     //creates a new object with the inputed values
-   const book = new Book(titleInput.value, authorInput.value, pagesInput.value, isReadInput.value)
+   const book = new Book(titleInput.value, authorInput.value, pagesInput.value, isChecked())
    addBookToLibrary(book)
    //makes a clean slate for the next book
    resetInput()
 })
 
 let myLibrary = [];
+
+function isChecked(){
+    if(checkBox.checked){
+        return true
+    }else{
+        return false
+    }
+}
 
 for (let i = 0; i < myLibrary.length; i++) {
     createCard(myLibrary[i])
@@ -27,8 +36,7 @@ function displayCard (){
     libraryCon.innerHTML = ""
     for (let i = 0; i < myLibrary.length; i++) {
     createCard(myLibrary[i])
-}
-}
+}}
 
 function createCard(object) {
     const newCard = document.createElement("div")
@@ -41,13 +49,31 @@ function createCard(object) {
         paragraph.textContent = object[Object.keys(object)[i]]
         newCard.appendChild(paragraph)
     }
+    const toggleIsRead = document.createElement("input")
+    toggleIsRead.setAttribute("type", "checkbox")
+    newCard.appendChild(toggleIsRead)
+    if(object.isRead){
+        toggleIsRead.checked = true
+        newCard.style.backgroundColor = "green"
+    }else{
+        newCard.style.backgroundColor = "red"
+    }
     const removeBtn = document.createElement("button")
     newCard.appendChild(removeBtn)
-    removeBtn.classList.add(myLibrary.indexOf(object))
     removeBtn.textContent = "Remove"
     removeBtn.addEventListener("click", function(){
         myLibrary.splice(myLibrary.indexOf(object), 1)
         displayCard()
+    })
+    toggleIsRead.addEventListener("click", function(){
+        if(toggleIsRead.checked){
+            object.isRead = true
+            newCard.style.backgroundColor = "green"
+        }else{
+            object.isRead = false
+            newCard.style.backgroundColor = "red"
+        }
+
     })
     
 }
