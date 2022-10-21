@@ -86,13 +86,16 @@ function removeBook(){
 
 }
 
-function Book(name, author, pages, isRead) {
+class Book{
+ constructor(name, author, pages, isRead) {
     // the constructor...
     this.name = name
     this.author = author
     this.pages = pages
     this.isRead = isRead
   }
+}
+
   
   function addBookToLibrary(book) {
     // do stuff here
